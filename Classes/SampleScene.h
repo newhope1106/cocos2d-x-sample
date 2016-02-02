@@ -6,13 +6,19 @@
 class SampleScene : public cocos2d::Layer
 {
 public:
+	cocos2d::Sprite* menuSprite;
+
     static cocos2d::Scene* createScene();
 
     virtual bool init();
     
+    void initMenuSprite();
+
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
     
+    void Roate(cocos2d::Ref *pSender);
+
     // implement the "static create()" method manually
     CREATE_FUNC(SampleScene);
 };

@@ -50,29 +50,48 @@ bool SampleScene::init()
 
     /////////////////////////////
     // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
     
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    
-    // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
+    initMenuSprite();
 
-    // add the label as a child to this layer
-    this->addChild(label, 1);
-
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-
-    // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-    // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
-    
     return true;
+}
+
+void SampleScene::initMenuSprite() {
+	menuSprite = Sprite::create("menu/menu_bg.jpg");
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	float spriteWidth = menuSprite->getContentSize().width;
+	float spriteHeight = menuSprite->getContentSize().height;
+	float visibleWidth = visibleSize.width;
+	float visibleHeight = visibleSize.height;
+
+	float scalX = visibleWidth*1.0f/spriteWidth;
+	float scalY = visibleHeight*1.0f/spriteHeight;
+
+	menuSprite->setScaleX(scalX);
+	menuSprite->setScaleY(scalY);
+
+	menuSprite->setPosition(Vec2(visibleWidth/2 + origin.x, visibleHeight/2 + origin.y));
+
+	auto label = Label::createWithTTF("Main Menu", "fonts/Marker Felt.ttf", 24);
+
+	float topBound = visibleHeight - 20;
+	// position the label on the center of the screen
+	label->setPosition(Vec2(visibleWidth/2, topBound - label->getContentSize().height));
+	menuSprite->addChild(label, 0);
+
+	Label *startLabel = Label::createWithTTF("Start Game", "fonts/Marker Felt.ttf", 20);
+	MenuItemLabel *itemLabel = MenuItemLabel::create(startLabel, CC_CALLBACK_1(SampleScene::Roate, this));
+	itemLabel->setPosition(Point(visibleWidth/2, 100));
+	menuSprite->addChild(itemLabel, 0);
+
+	Label *exitLabel = Label::createWithTTF("Exit Game", "fonts/Marker Felt.ttf", 20);
+	itemLabel = MenuItemLabel::create(exitLabel, CC_CALLBACK_1(SampleScene::menuCloseCallback, this));
+	itemLabel->setPosition(Point(visibleWidth/2, 60));
+	menuSprite->addChild(itemLabel, 0);
+
+	this->addChild(menuSprite, 0);
 }
 
 
@@ -83,4 +102,10 @@ void SampleScene::menuCloseCallback(Ref* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
+}
+
+void SampleScene::Roate(Ref *pSender){
+
+    Node *node = (Node *)pSender;
+    node->runAction(RotateBy::create(0.5, 360));
 }
