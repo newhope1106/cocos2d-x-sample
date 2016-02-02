@@ -1,4 +1,7 @@
 #include "SampleScene.h"
+#include "SimpleAudioEngine.h"
+
+#define MUSIC_FILE "music/Hackers.mp3"
 
 USING_NS_CC;
 
@@ -51,6 +54,11 @@ bool SampleScene::init()
     /////////////////////////////
     // 3. add your codes below...
     
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(MUSIC_FILE);
+	// set default volume
+    CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(1);
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(MUSIC_FILE, true);
+
     initMenuSprite();
 
     return true;
