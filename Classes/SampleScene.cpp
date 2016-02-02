@@ -1,8 +1,8 @@
-#include "HelloWorldScene.h"
+#include "SampleScene.h"
 
 USING_NS_CC;
 
-Scene* HelloWorld::createScene()
+Scene* SampleScene::createScene()
 {
     // 'scene' is an autorelease object
     auto scene = Scene::create();
@@ -18,7 +18,7 @@ Scene* HelloWorld::createScene()
 }
 
 // on "init" you need to initialize your instance
-bool HelloWorld::init()
+bool SampleScene::init()
 {
     //////////////////////////////
     // 1. super init first
@@ -76,7 +76,7 @@ bool HelloWorld::init()
 }
 
 
-void HelloWorld::menuCloseCallback(Ref* pSender)
+void SampleScene::menuCloseCallback(Ref* pSender)
 {
     Director::getInstance()->end();
 
