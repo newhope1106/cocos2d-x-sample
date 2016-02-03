@@ -30,30 +30,6 @@ bool SampleScene::init()
         return false;
     }
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(SampleScene::menuCloseCallback, this));
-    
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
-
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
-
-    /////////////////////////////
-    // 3. add your codes below...
-    
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(MUSIC_FILE);
 	// set default volume
     CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(1);
@@ -89,15 +65,19 @@ void SampleScene::initMenuSprite() {
 	label->setPosition(Vec2(visibleWidth/2, topBound - label->getContentSize().height));
 	menuSprite->addChild(label, 0);
 
+	auto menu = Menu::create();
+	menu->setPosition(Vec2::ZERO);
+	menuSprite->addChild(menu, 1);
+
 	Label *startLabel = Label::createWithTTF("Start Game", "fonts/Marker Felt.ttf", 20);
 	MenuItemLabel *itemLabel = MenuItemLabel::create(startLabel, CC_CALLBACK_1(SampleScene::Roate, this));
 	itemLabel->setPosition(Point(visibleWidth/2, 100));
-	menuSprite->addChild(itemLabel, 0);
+	menu->addChild(itemLabel, 0);
 
-	Label *exitLabel = Label::createWithTTF("Exit Game", "fonts/Marker Felt.ttf", 20);
+	Label *exitLabel = Label::createWithTTF("Exit", "fonts/Marker Felt.ttf", 20);
 	itemLabel = MenuItemLabel::create(exitLabel, CC_CALLBACK_1(SampleScene::menuCloseCallback, this));
 	itemLabel->setPosition(Point(visibleWidth/2, 60));
-	menuSprite->addChild(itemLabel, 0);
+	menu->addChild(itemLabel, 0);
 
 	this->addChild(menuSprite, 0);
 }
