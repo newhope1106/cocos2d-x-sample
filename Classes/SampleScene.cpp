@@ -101,7 +101,7 @@ void SampleScene::menuCloseCallback(Ref* pSender)
 void SampleScene::viewVideo(Ref *pSender) {
 	auto videoScene = VideoScene::createScene();
 	TransitionFlipX * transition =TransitionFlipX::create(1.0, videoScene);
-	Director::getInstance()->replaceScene(transition);
+	Director::getInstance()->pushScene(transition);
 }
 
 void SampleScene::Roate(Ref *pSender){

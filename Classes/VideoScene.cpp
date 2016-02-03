@@ -1,5 +1,4 @@
 #include "VideoScene.h"
-#include "SampleScene.h"
 
 #include "ui/CocosGUI.h"
 #include "SimpleAudioEngine.h"
@@ -100,7 +99,6 @@ void VideoScene::onKeyReleased(EventKeyboard::KeyCode keyCode,Event * pEvent){
 }
 
 void VideoScene::backToMainScene(){
-	auto sampleScene = SampleScene::createScene();
-	TransitionFlipX * transition =TransitionFlipX::create(1.0, sampleScene);
-	Director::getInstance()->replaceScene(transition);
+	CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+	Director::getInstance()->popScene();
 }
