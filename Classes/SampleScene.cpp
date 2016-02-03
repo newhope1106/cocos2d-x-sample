@@ -1,4 +1,5 @@
 #include "SampleScene.h"
+#include "VideoScene.h"
 #include "SimpleAudioEngine.h"
 
 #define MUSIC_FILE "music/Hackers.mp3"
@@ -71,6 +72,11 @@ void SampleScene::initMenuSprite() {
 
 	Label *startLabel = Label::createWithTTF("Start Game", "fonts/Marker Felt.ttf", 20);
 	MenuItemLabel *itemLabel = MenuItemLabel::create(startLabel, CC_CALLBACK_1(SampleScene::Roate, this));
+	itemLabel->setPosition(Point(visibleWidth/2, 140));
+	menu->addChild(itemLabel, 0);
+
+	Label *videoLabel = Label::createWithTTF("View Video", "fonts/Marker Felt.ttf", 20);
+	itemLabel = MenuItemLabel::create(videoLabel, CC_CALLBACK_1(SampleScene::viewVideo, this));
 	itemLabel->setPosition(Point(visibleWidth/2, 100));
 	menu->addChild(itemLabel, 0);
 
@@ -90,6 +96,12 @@ void SampleScene::menuCloseCallback(Ref* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
+}
+
+void SampleScene::viewVideo(Ref *pSender) {
+	auto videoScene = VideoScene::createScene();
+	TransitionFlipX * transition =TransitionFlipX::create(1.0, videoScene);
+	Director::getInstance()->replaceScene(transition);
 }
 
 void SampleScene::Roate(Ref *pSender){

@@ -19,6 +19,8 @@ public:
     
     void Roate(cocos2d::Ref *pSender);
 
+    void viewVideo(cocos2d::Ref *pSender);
+
     // implement the "static create()" method manually
     CREATE_FUNC(SampleScene);
 };
