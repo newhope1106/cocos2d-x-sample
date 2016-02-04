@@ -17,7 +17,7 @@ public:
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
     
-    void Roate(cocos2d::Ref *pSender);
+    void gotoMainScene(cocos2d::Ref *pSender);
 
     void viewVideo(cocos2d::Ref *pSender);
 
